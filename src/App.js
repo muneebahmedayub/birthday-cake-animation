@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import './App.css';
+import Cake from './components/Cake/Cake';
 
 function App() {
+  const [confettiFlag, setConfettiFlag] = useState(false)
+  const [textOpacity, setTextOpacity] = useState(0)
+  useEffect(() => {
+    setTimeout(() => {
+      setConfettiFlag(true)
+      setTextOpacity(true)
+    }, 6500)
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {confettiFlag && <Confetti style={{ zIndex: -10, opacity: 0.6 }} />}
+      <Cake />
+      <div style={{ opacity: textOpacity }} className="text">
+        <h1>Happy Birthday!</h1>
+        <p>Happiest 16th Birthday Zain Ali!</p>
+        <p>Many many happy returns of the day!</p>
+        <p>I wish that the coming year will be the best year of your life!</p>
+      </div>
     </div>
   );
 }
